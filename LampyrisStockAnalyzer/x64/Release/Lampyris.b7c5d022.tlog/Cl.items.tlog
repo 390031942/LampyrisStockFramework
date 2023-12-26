@@ -1,0 +1,8 @@
+C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\Base\StockData.cpp;C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\x64\Release\StockData.obj
+C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\Base\StockDescriptor.cpp;C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\x64\Release\StockDescriptor.obj
+C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\Descriptor\ConsecutiveRed.cpp;C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\x64\Release\ConsecutiveRed.obj
+C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\Descriptor\ConsecutiveRedAndFall.cpp;C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\x64\Release\ConsecutiveRedAndFall.obj
+C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\Descriptor\GapUpOpenAndFall.cpp;C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\x64\Release\GapUpOpenAndFall.obj
+C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\Descriptor\RiseAndFall.cpp;C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\x64\Release\RiseAndFall.obj
+C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\JobSystem\JobSystem.cpp;C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\x64\Release\JobSystem.obj
+C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\main.cpp;C:\Users\Administrator\source\repos\LampyrisStockAnalyzer\LampyrisStockAnalyzer\x64\Release\main.obj
