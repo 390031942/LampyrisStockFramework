@@ -1,4 +1,25 @@
+/*
+ * File:  StockDataReader.cpp
+ * Brief: 从csv中读取k线数据
+ * Author:wushuhong
+ * Date： 20223/12/11
+*/
+
+// Project Include(s)
 #include "StockDataReader.h"
+#include "Utilities.h"
+
+// 文件名格式必须为: 股票名称_代码.csv
+static std::string extractStockCode(const std::string& fileName) {
+    auto strs1 = Utilities::split(fileName, '.');
+    if (strs1.size() > 1) {
+        auto strs2 = Utilities::split(strs1[0], '_');
+        if (strs2.size() > 1) {
+            return strs2[0].c_str();
+        }
+    }
+    return "";
+}
 
 StockDataPtr StockDataReader::handleSingleFile(const std::string& path) {
     // 从CSV文件中读取数据
@@ -9,13 +30,14 @@ StockDataPtr StockDataReader::handleSingleFile(const std::string& path) {
 
     pStockData->m_stockPerDayData.reserve(readDoc.GetRowCount());
     pStockData->m_fileName = std::filesystem::path(path).filename().string();
+    pStockData->m_code = extractStockCode(pStockData->m_fileName);
 
     // 获取并打印所有行数据
     for (size_t i = 0; i < readDoc.GetRowCount(); i++) {
         std::vector<std::string> row = readDoc.GetRow<std::string>(i);
         StockPerDayDataPtr pCurrent = std::make_shared<StockPerDayData>();
 
-		pStockData->m_name = row[0];
+        pStockData->m_name = row[0];
 
         // 日期
         std::istringstream ss(row[2]);

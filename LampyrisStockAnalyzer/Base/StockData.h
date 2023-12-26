@@ -21,6 +21,15 @@ typedef std::shared_ptr<StockPerDayData> StockPerDayDataPtr;
 typedef std::shared_ptr<StockData> StockDataPtr;
 typedef std::chrono::year_month_day StockDate;
 
+struct MAData {
+    float MA5;
+    float MA10;
+    float MA20;
+    float MA30;
+    float MA60;
+    float MA120;
+    float MA250;
+};
 class StockPerDayData {
     typedef StockPerDayDataPtr PointerType;
 private:
@@ -116,6 +125,8 @@ class StockData {
 private:
 	std::string m_name;
 	std::string m_fileName;
+    std::string m_code;
+
     std::vector<StockPerDayDataPtr> m_stockPerDayData;
 public:
     const StockPerDayDataPtr getCurrentDateData() const {
@@ -130,6 +141,9 @@ public:
 		return this->m_fileName;
 	}
 
+    const std::string& getCode() const {
+        return this->m_code;
+    }
 
     friend class StockDataReader;
 };

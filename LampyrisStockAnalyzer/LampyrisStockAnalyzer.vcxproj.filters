@@ -64,7 +64,10 @@
       <Filter>Source Files\Base</Filter>
     </ClCompile>
     <ClCompile Include="Descriptor\BigRedAndTwoGreen.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Descriptor</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Utilities.cpp">
+      <Filter>Source Files\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="3rd-party\rapidcsv.h">
       <Filter>Header Files\3rd-party</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Utilities.h">
+      <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

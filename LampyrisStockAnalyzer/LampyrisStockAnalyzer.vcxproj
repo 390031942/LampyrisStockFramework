@@ -139,6 +139,7 @@
     <ClCompile Include="Base\StockData.cpp" />
     <ClCompile Include="Base\StockDataReader.cpp" />
     <ClCompile Include="Base\StockDescriptor.cpp" />
+    <ClCompile Include="Base\Utilities.cpp" />
     <ClCompile Include="Descriptor\BigRedAndTwoGreen.cpp" />
     <ClCompile Include="Descriptor\ConsecutiveRed.cpp" />
     <ClCompile Include="Descriptor\ConsecutiveRedAndFall.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Base\StockData.h" />
     <ClInclude Include="Base\StockDataReader.h" />
     <ClInclude Include="Base\StockDescriptor.h" />
+    <ClInclude Include="Base\Utilities.h" />
     <ClInclude Include="Descriptor\BigRedAndTwoGreen.h" />
     <ClInclude Include="Descriptor\ConsecutiveRed.h" />
     <ClInclude Include="Descriptor\ConsecutiveRedAndFall.h" />

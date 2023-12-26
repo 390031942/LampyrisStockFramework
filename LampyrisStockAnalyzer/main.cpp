@@ -14,6 +14,7 @@
 #include <vector>
 #include <string>
 #include <memory> // std::shared_ptr
+#include <format> // C++ 20
 
 // Project Include(s)
 #include "Descriptor/RiseAndFall.h"
@@ -24,57 +25,100 @@
 
 #include "Core/AnalyzerEngine.h"
 #include "Base/StockDataReader.h"
+#include <unordered_set>
 
-void printResult(std::vector<StockDataPtr>& result) {
+static void printResult(const std::vector<StockDataPtr>& result) {
 	for (StockDataPtr ptr : result) {
 		std::cout << ptr->getFileName() << std::endl;
 	}
 }
 
-int main() {
+static std::string generatePythonListCode(const std::unordered_set<std::string>& stockCodeSet) {
+	std::string result = "[";
+	if (!stockCodeSet.empty()) {
+		for (auto code : stockCodeSet) {
+			result += std::format("'{}',", code);
+		}
+	}
+	result += "]";
+
+	return result;
+}
+
+static void appendNeedWatchStockCode(const std::vector<StockDataPtr>& result, std::unordered_set<std::string>& stockCodeSet) {
+	for (StockDataPtr ptr : result) {
+		stockCodeSet.insert(ptr->getCode());
+	}
+}
+
+int main(int argc,char** argv) {
+	if (argc == 1) {
+		std::cout << "用法: LampyrisStockAnalyzer.exe 数据集目录" << std::endl;
+		return -1;
+	}
+
+	const char* path = argv[1];
+	if (!(std::filesystem::exists(path) && std::filesystem::is_directory(path))) {
+		std::cout << "输入数据集文件路径无效，请检查!" << std::endl;
+		return -1;
+	}
+
+	/* 递归遍历包含csv文件的文件夹，得到股票历史数据 */
     StockDataReader reader;
+    std::vector<StockDataPtr> stockList = reader.traverseFolder(argv[1]);
 
-    std::vector<StockDataPtr> stockList = reader.traverseFolder("C:\\Users\\wsh39\\Desktop\\Working\\LampyrisStockAnalyzer\\Dataset");
-    AnalyzerEngine analyzerEngine(stockList);
+	/* 从已有选股规则中得到的股票代码集合 */
+	std::unordered_set<std::string> needWatchSet;
 
+	/* 从单个规则中选出来的股票数据 */
+	std::vector<StockDataPtr> result;
+
+	AnalyzerEngine analyzerEngine(stockList);
     {
+		result.clear();
 		std::cout << "冲高回落:" << std::endl;
 		RiseAndFall descriptor;
-		std::vector<StockDataPtr> result;
 		analyzerEngine.filter(result, descriptor);
 		printResult(result);
+		appendNeedWatchStockCode(result, needWatchSet);
     }
 
 	{
+		result.clear();
 		std::cout << "三连阳" << std::endl;
 		ConsecutiveRed descriptor;
-		std::vector<StockDataPtr> result;
 		analyzerEngine.filter(result, descriptor);
 		printResult(result);
+		appendNeedWatchStockCode(result, needWatchSet);
 	}
 
 	{
+		result.clear();
 		std::cout << "三连阳回落" << std::endl;
 		ConsecutiveRedAndFall descriptor;
-		std::vector<StockDataPtr> result;
 		analyzerEngine.filter(result, descriptor);
 		printResult(result);
+		appendNeedWatchStockCode(result, needWatchSet);
 	}
 
 	{
+		result.clear();
 		std::cout << "跳空高开回落" << std::endl;
 		GapUpOpenAndFall descriptor;
-		std::vector<StockDataPtr> result;
 		analyzerEngine.filter(result, descriptor);
 		printResult(result);
+		appendNeedWatchStockCode(result, needWatchSet);
 	}
 
 	{
+		result.clear();
 		std::cout << "一根大阳线后缩量两连阴" << std::endl;
 		BigRedAndTwoGreen descriptor;
-		std::vector<StockDataPtr> result;
 		analyzerEngine.filter(result, descriptor);
 		printResult(result);
+		appendNeedWatchStockCode(result, needWatchSet);
 	}
+
+	std::cout << "Python Code:\n" << generatePythonListCode(needWatchSet) << std::endl;
     return 0;
 }
